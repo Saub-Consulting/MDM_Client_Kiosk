@@ -1,0 +1,2 @@
+alias: mdm_client
+pass: mdm_client

@@ -1,9 +1,8 @@
+import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:ussd_service/ussd_service.dart';
 
 class LockedPage extends StatelessWidget {
   const LockedPage({super.key});
@@ -17,15 +16,12 @@ class LockedPage extends StatelessWidget {
     }
   }
 
-  makeMyRequest() async {
-    int subscriptionId = 1; // sim card subscription Id
-    String code = "9059078712"; // ussd code payload
-    try {
-      String ussdSuccessMessage = await UssdService.makeRequest(subscriptionId, code);
-      print("succes! message: $ussdSuccessMessage");
-    } on PlatformException catch (e) {
-      print("error! code: ${e.code} - message: ${e.message}");
-    }
+  initiateCall() async {
+    AndroidIntent intent = AndroidIntent(
+      action: 'android.intent.action.CALL',
+      data: Uri(scheme: 'tel', path: '7014261395').toString(),
+    );
+    await intent.launch();
   }
 
   @override
@@ -45,16 +41,20 @@ class LockedPage extends StatelessWidget {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             Container(height: 10),
-            const Text('Tejpal Jadav to unlock', textAlign: TextAlign.center, style: TextStyle(fontSize: 20)),
+            const Text('Call Tejpal Jadav to unlock', textAlign: TextAlign.center, style: TextStyle(fontSize: 20)),
             Container(height: 10),
             GestureDetector(
-                onTap: () async {
-                  final permission = await Permission.phone.request();
-                  if (permission.isGranted) {
-                    makeMyRequest();
-                  }
-                },
-                child: const Text('+91 9876543210')),
+              onTap: () async {
+                final permission = await Permission.phone.request();
+                if (permission.isGranted) {
+                  initiateCall();
+                }
+              },
+              child: const Text(
+                '+91 9876543210',
+                style: TextStyle(fontSize: 20, color: Colors.blue),
+              ),
+            ),
             Container(height: 10),
             OutlinedButton(
                 onPressed: () {

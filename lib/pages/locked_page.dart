@@ -8,12 +8,12 @@ import 'package:ussd_service/ussd_service.dart';
 class LockedPage extends StatelessWidget {
   const LockedPage({super.key});
   void _launchDialer([String? phoneNumber]) async {
-    final Uri _phoneLaunchUri = Uri(scheme: 'tel', path: phoneNumber);
+    final Uri phoneLaunchUri = Uri(scheme: 'tel', path: phoneNumber);
 
-    if (await canLaunchUrl(_phoneLaunchUri)) {
-      await launchUrl(_phoneLaunchUri);
+    if (await canLaunchUrl(phoneLaunchUri)) {
+      await launchUrl(phoneLaunchUri);
     } else {
-      print('Could not launch $_phoneLaunchUri');
+      print('Could not launch $phoneLaunchUri');
     }
   }
 
@@ -27,7 +27,6 @@ class LockedPage extends StatelessWidget {
       print("error! code: ${e.code} - message: ${e.message}");
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -46,31 +45,33 @@ class LockedPage extends StatelessWidget {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             Container(height: 10),
-            const Text('Tejpal Jadav to unlock',
-                textAlign: TextAlign.center, style: TextStyle(fontSize: 20)),
+            const Text('Tejpal Jadav to unlock', textAlign: TextAlign.center, style: TextStyle(fontSize: 20)),
             Container(height: 10),
-            GestureDetector(onTap:() async {
-              final permission = await Permission.phone.request();
-              if(permission.isGranted){
-                makeMyRequest();
-              }
-            },child: const Text('+91 9876543210')),
+            GestureDetector(
+                onTap: () async {
+                  final permission = await Permission.phone.request();
+                  if (permission.isGranted) {
+                    makeMyRequest();
+                  }
+                },
+                child: const Text('+91 9876543210')),
             Container(height: 10),
             OutlinedButton(
                 onPressed: () {
                   _launchDialer();
-                }, child: const Text("Emergency Call")),
+                },
+                child: const Text("Emergency Call")),
             Container(height: 10),
-            Spacer(
+            const Spacer(
               flex: 1,
             ),
-            Text('scan and pay using qr'),
+            const Text('scan and pay using qr'),
             QrImageView(
               data: 'Tejpal Jadav to unlock +91 9876543210',
               version: QrVersions.auto,
               size: 300.0,
             ),
-            Spacer(
+            const Spacer(
               flex: 3,
             )
           ],

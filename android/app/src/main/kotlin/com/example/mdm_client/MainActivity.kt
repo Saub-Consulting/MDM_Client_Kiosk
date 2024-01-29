@@ -1,4 +1,4 @@
-package com.pallinos.mdm_client
+package com.superdevx.mdm_client
 
 import io.flutter.embedding.android.FlutterActivity
 

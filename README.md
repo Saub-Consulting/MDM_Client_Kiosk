@@ -1,4 +1,4 @@
-# mdm_client
+# MDM Client Kiosk
 
 A new Flutter project.
 

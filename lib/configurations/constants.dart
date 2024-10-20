@@ -4,4 +4,4 @@ const supportPhoneNumbers = [
   '+917014261395',
   '+919314296052',
 ];
-const dealerName = 'Tejpal Jadav';
+const dealerName = 'Tejpal Verma';

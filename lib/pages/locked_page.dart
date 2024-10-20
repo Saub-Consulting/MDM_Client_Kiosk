@@ -29,7 +29,7 @@ class LockedPage extends StatelessWidget {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: kPadding * 2),
-              const Text('Call Tejpal Jadav to unlock', textAlign: TextAlign.center, style: TextStyle(fontSize: 20)),
+              const Text('Call $dealerName to unlock', textAlign: TextAlign.center, style: TextStyle(fontSize: 20)),
               const SizedBox(height: kPadding * 2),
               ListView.builder(
                 itemCount: supportPhoneNumbers.length,
